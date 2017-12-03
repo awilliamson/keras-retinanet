@@ -76,6 +76,8 @@ class TestLoadAnnotationsGroup(object):
             ]),
         ]
 
+        input_image = np.zeros((500, 500, 3))
+
         expected_annotations_group = [
             np.array([
                 [  0,   0, 10, 10],
@@ -83,9 +85,10 @@ class TestLoadAnnotationsGroup(object):
         ]
 
         simple_generator = SimpleGenerator(input_annotations_group)
+        annotations_group = simple_generator.load_annotations_group(simple_generator.groups[0])
         # expect a UserWarning
         with pytest.warns(UserWarning):
-            annotations_group = simple_generator.load_annotations_group(simple_generator.groups[0])
+            image_group, annotations_group = simple_generator.check_images_annotations([input_image], annotations_group, simple_generator.groups[0])
 
         np.testing.assert_equal(expected_annotations_group, annotations_group)
 
@@ -107,7 +110,13 @@ class TestLoadAnnotationsGroup(object):
                 [-10, -10, -100, -100],
                 [ 10,  10,  100,  100]
             ]),
+            np.array([
+                [ 10,  10,  100,  100],
+                [ 10,  10,  600,  600]
+            ]),
         ]
+
+        input_image = np.zeros((500, 500, 3))
 
         expected_annotations_group = [
             np.array([
@@ -118,17 +127,25 @@ class TestLoadAnnotationsGroup(object):
             np.zeros((0, 4)),
             np.array([
                 [10, 10, 100, 100]
-            ])
+            ]),
+            np.array([
+                [ 10,  10,  100,  100]
+            ]),
         ]
 
         simple_generator = SimpleGenerator(input_annotations_group)
         # expect a UserWarning
+        annotations_group_0 = simple_generator.load_annotations_group(simple_generator.groups[0])
         with pytest.warns(UserWarning):
-            annotations_group_0 = simple_generator.load_annotations_group(simple_generator.groups[0])
+            image_group, annotations_group_0 = simple_generator.check_images_annotations([input_image], annotations_group_0, simple_generator.groups[0])
+
+        annotations_group_1 = simple_generator.load_annotations_group(simple_generator.groups[1])
         with pytest.warns(UserWarning):
-            annotations_group_1 = simple_generator.load_annotations_group(simple_generator.groups[1])
+            image_group, annotations_group_1 = simple_generator.check_images_annotations([input_image], annotations_group_1, simple_generator.groups[1])
+
+        annotations_group_2 = simple_generator.load_annotations_group(simple_generator.groups[2])
         with pytest.warns(UserWarning):
-            annotations_group_2 = simple_generator.load_annotations_group(simple_generator.groups[2])
+            image_group, annotations_group_2 = simple_generator.check_images_annotations([input_image], annotations_group_2, simple_generator.groups[2])
 
         np.testing.assert_equal([expected_annotations_group[0]], annotations_group_0)
         np.testing.assert_equal([expected_annotations_group[1]], annotations_group_1)
