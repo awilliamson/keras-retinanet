@@ -6,7 +6,10 @@ class DatasetPlugin(IPlugin):
         super(DatasetPlugin, self).__init__()
 
 
-    def parser_args(self):
+    def parser_args(self, parser):
+        pass
+
+    def check_args(self, parsed_args):
         pass
 
     def get_generator(self):
