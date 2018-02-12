@@ -250,11 +250,9 @@ def parse_args(args):
     subparsers = parser.add_subparsers(help='Arguments for specific dataset types.', dest='dataset_type')
     subparsers.required = True
 
-    coco_parser = subparsers.add_parser('coco')
-    coco_parser.add_argument('coco_path', help='Path to dataset directory (ie. /tmp/COCO).')
-
-    pascal_parser = subparsers.add_parser('pascal')
-    pascal_parser.add_argument('pascal_path', help='Path to dataset directory (ie. /tmp/VOCdevkit).')
+    # Invoke all loaded plugins for their subparsers.
+    for plugin in PluginManagerSingleton.get().getAllPlugins():
+        plugin.plugin_object.parser_args(subparsers)
 
     def csv_list(string):
         return string.split(',')
@@ -264,11 +262,6 @@ def parse_args(args):
     oid_parser.add_argument('--version',  help='The current dataset version is V3.', default='2017_11')
     oid_parser.add_argument('--labels_filter',  help='A list of labels to filter.', type=csv_list, default=None)
     oid_parser.add_argument('--annotation_cache_dir', help='Path to store annotation cache.', default='.')
-
-    csv_parser = subparsers.add_parser('csv')
-    csv_parser.add_argument('annotations', help='Path to CSV file containing annotations for training.')
-    csv_parser.add_argument('classes', help='Path to a CSV file containing class label mapping.')
-    csv_parser.add_argument('--val-annotations', help='Path to CSV file containing annotations for validation (optional).')
 
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--snapshot',          help='Resume training from a snapshot.')
