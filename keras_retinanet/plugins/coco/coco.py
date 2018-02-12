@@ -22,8 +22,10 @@ class CocoPlugin(plugins.DatasetPlugin):
     def __init__(self):
         super(CocoPlugin, self).__init__()
 
+        self.dataset_type = "coco"
+
     def parser_args(self, subparsers):
-        coco_parser = subparsers.add_parser('coco')
+        coco_parser = subparsers.add_parser(self.dataset_type)
         coco_parser.add_argument('coco_path', help='Path to dataset directory (ie. /tmp/COCO).')
 
         return coco_parser

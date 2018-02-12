@@ -22,8 +22,10 @@ class VocPlugin(plugins.DatasetPlugin):
     def __init__(self):
         super(VocPlugin, self).__init__()
 
+        self.dataset_type = "pascal"
+
     def parse_args(self, subparsers):
-        pascal_parser = subparsers.add_parser('pascal')
+        pascal_parser = subparsers.add_parser(self.dataset_type)
         pascal_parser.add_argument('pascal_path', help='Path to dataset directory (ie. /tmp/VOCdevkit).')
 
         return pascal_parser
