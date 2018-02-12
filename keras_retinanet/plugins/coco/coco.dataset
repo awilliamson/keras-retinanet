@@ -1,0 +1,9 @@
+[Core]
+Name = Coco Dataset
+Module = coco
+
+[Documentation]
+Description = RetinaNet Definition for COCO Dataset
+Author = Ashley Williamson
+Version = 1.0
+Website =

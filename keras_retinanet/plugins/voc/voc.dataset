@@ -1,0 +1,9 @@
+[Core]
+Name = VOC Dataset
+Module = voc
+
+[Documentation]
+Description = RetinaNet Definition for VOC Dataset
+Author = Ashley Williamson
+Version = 1.0
+Website =
