@@ -1,0 +1,9 @@
+[Core]
+Name = CSV Dataset
+Module = csv
+
+[Documentation]
+Description = RetinaNet Definition for CSV Dataset
+Author = Ashley Williamson
+Version = 1.0
+Website =
