@@ -3,6 +3,7 @@ from yapsy.IPlugin import IPlugin
 
 class DatasetPlugin(IPlugin):
     def __init__(self):
+        self.dataset_type = None
         super(DatasetPlugin, self).__init__()
 
 
