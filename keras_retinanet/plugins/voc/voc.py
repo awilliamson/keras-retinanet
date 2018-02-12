@@ -5,3 +5,9 @@ import keras_retinanet.utils.plugin as plugins
 class VocPlugin(plugins.DatasetPlugin):
     def __init__(self):
         super(VocPlugin, self).__init__()
+
+    def parse_args(self, subparsers):
+        pascal_parser = subparsers.add_parser('pascal')
+        pascal_parser.add_argument('pascal_path', help='Path to dataset directory (ie. /tmp/VOCdevkit).')
+
+        return pascal_parser
