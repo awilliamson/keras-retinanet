@@ -26,5 +26,5 @@ class DatasetPlugin(IPlugin):
     def parser_args(self):
         pass
 
-    def get_generator(self):
+    def get_generator(self, args):
         pass
